@@ -9,7 +9,7 @@ pipeline {
     stages {
         stage('Checkout Code') {
             steps {                
-                git url: 'git@github.com:AkyiTheFirst/Jenkins-one.git', branch: 'master'
+                git url: 'git@github.com:AkyiTheFirst/Jenkins-one.git', branch: 'main'
             }
         }
 

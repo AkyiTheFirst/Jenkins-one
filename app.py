@@ -11,7 +11,7 @@ class Movie:
         self.rating = float(rating) if rating else 0.0
         self.director = director
 
-    def str(self):
+    def __str__(self):
         return f"{self.title} ({self.year}) - {self.rating}"
 
 # ---- Data Source ----
@@ -49,7 +49,7 @@ class RecommendationEngine:
         return sorted(movies, key=lambda m: m.rating, reverse=True)[:top_n]
 
 # ---- Flask App ----
-app = Flask(name)
+app = Flask(__name__)
 
 csv_path = "D://WisdomC/205 COA2009 U9_Advanced Programming/Dataset/archive/imdb_top_1000.csv"  # Replace with your actual CSV path
 data_source = CSVDataSource(csv_path)
@@ -96,5 +96,5 @@ def home():
 
     return render_template_string(HTML_TEMPLATE, recommendations=recommendations)
 
-if name == 'main':
+if __name__ == '__main__':
     app.run(debug=True)
