@@ -4,7 +4,7 @@ from typing import List
 
 # ---- Movie Class ----
 class Movie:
-    def init(self, title, genre, year, rating, director):
+    def __init__(self, title, genre, year, rating, director):
         self.title = title
         self.genre = genre.split(', ') if isinstance(genre, str) else genre
         self.year = int(year)
@@ -16,7 +16,7 @@ class Movie:
 
 # ---- Data Source ----
 class CSVDataSource:
-    def init(self, filepath):
+    def __init__(self, filepath):
         self.filepath = filepath
 
     def load_movies(self) -> List[Movie]:
@@ -37,7 +37,7 @@ class CSVDataSource:
 
 # ---- Repository ----
 class MovieRepository:
-    def init(self, data_source: CSVDataSource):
+    def __init__(self, data_source: CSVDataSource):
         self.movies = data_source.load_movies()
 
     def filter_by_genre_and_year(self, genre: str, start_year: int, end_year: int) -> List[Movie]:
@@ -51,7 +51,7 @@ class RecommendationEngine:
 # ---- Flask App ----
 app = Flask(__name__)
 
-csv_path = "D://WisdomC/205 COA2009 U9_Advanced Programming/Dataset/archive/imdb_top_1000.csv"  # Replace with your actual CSV path
+csv_path = "imdb_top_1000.csv"  # Replace with your actual CSV path
 data_source = CSVDataSource(csv_path)
 repo = MovieRepository(data_source)
 engine = RecommendationEngine()
