@@ -12,7 +12,7 @@ pipeline {
     stages {
         stage('Checkout Code') {
             steps {
-                git url: 'git@github.com:xxxxxxxxxxxxxxxxxxxxx.git', branch: 'main' // Your SSH link
+                git url: 'git@github.com:AkyiTheFirst/Docker-Two.git', branch: 'main' // Your SSH link
             }
         }
 
