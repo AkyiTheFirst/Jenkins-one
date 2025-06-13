@@ -53,7 +53,7 @@ pipeline {
                 '''
             }
         }
-        
+
         stage('SCA Scan (Dependency-Check)') {
             steps {
                 sh '''
@@ -122,5 +122,33 @@ pipeline {
                 }
             }
         }
-    }
-}
+        stage('DAST Scan (OWASP ZAP)') {
+            steps {
+                sh """
+                /opt/owasp-zap/zap.sh -cmd \\
+                    -port 8090 -host 127.0.0.1 \\
+                    -config api.disablekey=true \\
+                    -newsession zap_scan \\
+                    -url ${APP_URL} \\
+                    -autorun \\
+                    -htmlreport ${ZAP_REPORT_PATH}
+                """
+            }
+            post {
+                always {
+                    archiveArtifacts artifacts: '**/zap_report.html', fingerprint: true
+                }
+                failure {
+                    echo 'ZAP DAST scan failed or found vulnerabilities!'
+                }
+            }
+        }
+
+        stage('Cleanup') {
+            steps {
+                sh 'rm -rf venv'
+            }
+        }
+    }  // <-- Only ONE closing brace here for stages
+
+} // <-- And this closes the pipeline block
