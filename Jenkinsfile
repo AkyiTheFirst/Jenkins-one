@@ -12,7 +12,7 @@ pipeline {
     stages {
         stage('Checkout Code') {
             steps {
-                git url: 'git@github.com:AkyiTheFirst/Docker-Two.git', branch: 'main' // Your SSH link
+                git url: 'git@github.com:AkyiTheFirst/Jenkins-one.git', branch: 'main' // Your SSH link
             }
         }
 
@@ -45,7 +45,7 @@ pipeline {
         stage('Deploy App Locally') {
             steps {
                 sh '''
-                    pkill -f "gunicorn"  true
+                    pkill -f gunicorn || true
                 '''
                 sh '''
                     . ${VENV_DIR}/bin/activate
