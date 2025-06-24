@@ -38,7 +38,7 @@ pipeline {
 
         stage('Checkout') {
             steps {
-                git 'https://github.com/CodeInsightAcademy/DevSecOps_CICD_1.git' // Replace with your repo
+                git 'https://github.com/AkyiTheFirst/JenkinsDevSecOp.git' // Replace with your repo
             }
         }
 
